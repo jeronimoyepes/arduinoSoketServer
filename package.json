@@ -1,0 +1,14 @@
+{
+  "name": "serialportcapture",
+  "version": "1.0.0",
+  "description": "Captura la información enviada desde un arduino mediante el puerto serial",
+  "main": "index.js",
+  "scripts": {
+    "test": "start"
+  },
+  "author": "Jero",
+  "license": "ISC",
+  "dependencies": {
+    "serialport": "^10.4.0"
+  }
+}

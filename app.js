@@ -6,20 +6,27 @@ import http from "http";
 // Entrar y modificar el puerto de comunicaciones!
 import { serialData } from "./serialport.js";
 
-// socket.io https://socket.io/docs/v4/
-import { io } from "./socketIO.js";
-
 // crear el servidor
 const app = express();
 const server = http.createServer(app);
 
-// Datos provenientes del arduino
-serialData.on("data", (data) => {
-  return data;
+// socket.io https://socket.io/docs/v4/
+import { Server } from "socket.io";
+const io = new Server(server);
+
+// Conexión de socket exitosa
+io.on("connection", (socket) => {
+  console.log("a user connected");
+  // Cuando se finaliza la conexión
+  socket.on("disconnect", () => {
+    console.log("user disconnected");
+  });
 });
 
-io.on('connection', (socket) => {
-  console.log('a user connected');
+// Datos provenientes del arduino
+serialData.on("data", (data) => {
+  // Enviar los datos mediante el socket
+  io.volatile.emit("ArduinoData", data);
 });
 
 app.get("/", (req, res) => {

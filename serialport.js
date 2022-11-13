@@ -1,11 +1,11 @@
-// ↓ cambiar el nombre del puerto al adecuado ↓
-const arduinoComPort = "COM13";
+// ↓ cambiar el nombre del puerto ↓ Ir a: administrador de dispositivos/puertosCOM
+const arduinoComPort = "COM12";
 
 // Librería para leer el puerto serial - Documentación -> https://serialport.io/docs/
-const { SerialPort } = require("serialport");
+import { SerialPort } from "serialport";
 
 // Importar el analizador gramatical para los datos que vienen del arduino
-const { ReadlineParser } = require("@serialport/parser-readline");
+import { ReadlineParser } from "serialport";
 
 // Instanciar un nuevo puerto serial
 const port = new SerialPort({ path: arduinoComPort, baudRate: 9600 });
@@ -21,12 +21,6 @@ port.on("error", function (err) {
 // Conexión establecida correctamente con el puerto
 port.on("open", () => {
   console.log("Puerto serial abierto");
-});
-
-// Datos provenientes del puerto
-serialData.on("data", (data) => {
-  // https://socket.io/get-started/chat
-  console.log("got word from arduino:", data);
 });
 
 export { serialData };

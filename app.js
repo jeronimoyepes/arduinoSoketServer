@@ -17,10 +17,10 @@ const io = new Server(server);
 
 // Conexión de socket exitosa
 io.on("connection", (socket) => {
-  console.log("a user connected");
+  console.log("Conexión establecida con interfaz de visualización");
   // Cuando se finaliza la conexión
   socket.on("disconnect", () => {
-    console.log("user disconnected");
+    console.log("Conexión cerrada con interfaz de visualización");
   });
 });
 
@@ -31,12 +31,17 @@ let arduinoDataPackage = [];
 serialData.on("data", (data) => {
   // Enviar los datos mediante el socket a la página web
   io.volatile.emit("ArduinoData", data);
-  arduinoDataPackage.push(data);
+
+  if (data.length > 0) {
+    // Agregar datos al paquete que se enviará a la base de datos
+    arduinoDataPackage.push(data);
+  }
 });
 
 // Enviar cada dos segundos un paquete de datos al servidor
 setInterval(() => {
-  if (data.length > 0) {
+  if (arduinoDataPackage.length > 0) {
+    console.log("Escribiendo en base de datos", arduinoDataPackage.length + " entradas en el paquete");
     writeToFirebase({ data: arduinoDataPackage, date: new Date() });
   }
   arduinoDataPackage = [];
@@ -44,7 +49,7 @@ setInterval(() => {
 
 // Ruta de la interfaz para mostrar las estadísticas
 app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/index.html");
+  res.sendFile(__dirname + "/dataVisualization.html");
 });
 
 // Inicializar el sevidor en el puerto 3000

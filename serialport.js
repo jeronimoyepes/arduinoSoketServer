@@ -1,4 +1,4 @@
-// ↓ cambiar el nombre del puerto ↓ Ir a: administrador de dispositivos/puertosCOM
+// ↓ cambiar el nombre del puerto ↓ Ir a: administrador de dispositivos/puertosCOM para obtener el nombre
 const arduinoComPort = "COM12";
 
 // Librería para leer el puerto serial - Documentación -> https://serialport.io/docs/
@@ -15,7 +15,7 @@ const serialData = port.pipe(new ReadlineParser({ delimiter: "\r\n" }));
 
 // En caso de errores en el puerto
 port.on("error", function (err) {
-  console.log("Error: ", err.message);
+  console.log("_ERROR_ ", err.message);
 });
 
 // Conexión establecida correctamente con el puerto

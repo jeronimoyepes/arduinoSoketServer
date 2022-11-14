@@ -5,7 +5,7 @@ import http from "http";
 import { studentGroupId } from "./variables.js";
 
 // Utilidad para imprimir textos en consola
-import { printLog } from "./helpers.js/log.js";
+import { printLog } from "./utilities/log.js";
 
 // Importar función para escribir a la base de datos
 import { writeToFirebase } from "./utilities/firebaseConf.js";
@@ -70,8 +70,8 @@ setInterval(() => {
       `Escribiendo en base de datos ${arduinoDataPackage.length} entradas en el paquete. ${date} - ${studentGroupId}`,
       "important"
     );
-    // TODO: pedirle al estudiante el número de identificación del grupo al iniciar el script y enviarlo con el paquete a la base de datos
-    writeToFirebase({ data: arduinoDataPackage, date, studentGroupId });
+
+    // writeToFirebase({ data: arduinoDataPackage, date, studentGroupId });
   }
   arduinoDataPackage = [];
 }, 3000);
@@ -81,7 +81,9 @@ app.get("/", (req, res) => {
   res.sendFile(__dirname + "/dataVisualization.html");
 });
 
+app.use(express.static('public'))
+
 // Inicializar el sevidor en el puerto 3000
 server.listen(3000, () => {
-  console.log("listening on *:3000");
+  console.log("listening on Port: 3000");
 });

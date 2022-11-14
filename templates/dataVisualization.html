@@ -5,22 +5,62 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Datos</title>
+    <link rel="stylesheet" href="/styles/main.css" />
   </head>
   <body>
     <header>
       <h2>Visualización de variables</h2>
-      <a href="#">Descargar datos</a>
+      <div id="status">
+        <span id="statusIcon"></span>
+        <p>Conectado</p>
+      </div>
+      <a id="download" href="#"
+        ><img src="images/download.svg" alt="" />
+        <p>Descargar datos</p></a
+      >
     </header>
-    <div>
-      <div class=""></div>
-    </div>
+    <main>
+      <div id="data">
+        <div>
+          <h3 id="humidity">0</h3>
+          <p>Humedad (%)</p>
+        </div>
+        <div>
+          <h3 id="temperature">0</h3>
+          <p>Temperatura (°C)</p>
+        </div>
+        <div>
+          <h3 id="luminosity">0</h3>
+          <p>Iluminación (lm)</p>
+        </div>
+        <div>
+          <h3 id="movement">0</h3>
+          <p>Movimiento</p>
+        </div>
+      </div>
+      <img id="enclosure" src="images/cage.png" alt="" />
+    </main>
   </body>
+
+  <!-- Importar la librería de socket -->
   <script src="/socket.io/socket.io.js"></script>
   <script>
+    // Iniciar librería de socket, por defecto escucha al host de la página
     var socket = io();
 
+    socket.on("close", (err) => {
+      document.getElementById("humidity").innerHTML = err;
+    });
+
+    let incomingSoketData = {};
+
+    // conectarse al socket
     socket.on("ArduinoData", function (data) {
-      console.log(data);
+      incomingSoketData = data;
+      document.getElementById("humidity").innerHTML = data.humidity;
+      document.getElementById("temperature").innerHTML = data.temperature;
+      document.getElementById("luminosity").innerHTML = data.luminosity;
+      document.getElementById("movement").innerHTML = data.movement;
     });
   </script>
 </html>

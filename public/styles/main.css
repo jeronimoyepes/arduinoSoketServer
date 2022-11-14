@@ -1,0 +1,103 @@
+@import url("https://fonts.googleapis.com/css2?family=Readex+Pro:wght@700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Readex Pro", Arial, sans-serif;
+  color: #c4c6ca;
+  text-decoration: none;
+  -webkit-transition: all 200ms ease-in-out;
+  -moz-transition: all 200ms ease-in-out;
+  -ms-transition: all 200ms ease-in-out;
+  -o-transition: all 200ms ease-in-out;
+  transition: all 200ms ease-in-out;
+}
+
+html {
+  background-color: #455065;
+}
+
+body {
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+header {
+  padding: 30px 50px;
+  background-color: #262d3d;
+  border-radius: 400px;
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+header h2 {
+  font-size: 2em;
+}
+
+img {
+  width: 100%;
+}
+
+main {
+  max-width: 1200px;
+  margin: 50px auto 0 auto;
+}
+
+#data {
+  display: flex;
+  justify-content: space-around;
+  padding: 0 60px;
+  margin-bottom: 10px;
+}
+#data > div {
+  text-align: center;
+  width: 220px;
+}
+
+#data h3 {
+  font-size: 4em;
+  color: #fff;
+}
+
+#data p {
+  color: #262d3d;
+}
+
+#download {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 30px;
+  border: 2px solid #43efa9;
+  border-radius: 10px;
+}
+
+#download:hover {
+  border-radius: 300px;
+}
+
+#download p {
+  color: #43efa9;
+}
+
+#download img {
+  width: 25px;
+}
+
+#status {
+  display: flex;
+  align-items: center;
+}
+
+#statusIcon {
+  display: block;
+  margin-right: 10px;
+  width: 30px;
+  height: 30px;
+  border-radius: 300px;
+  background-color: #43efa9;
+  border: 2px solid #455065;
+}

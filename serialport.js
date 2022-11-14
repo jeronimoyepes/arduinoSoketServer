@@ -3,7 +3,7 @@
 import { arduinoComPort, baudRate } from "./variables.js";
 
 // Utilidad para imprimir textos en consola
-import { printLog } from "./helpers.js/log.js";
+import { printLog } from "./utilities/log.js";
 
 // Librería para leer el puerto serial - Documentación: https://serialport.io/docs/
 import { SerialPort } from "serialport";
@@ -23,7 +23,7 @@ let isPortConnected = false;
 
 // Cada tres segundos intentar recuperar la conexión del puerto
 function tryPortReconnection() {
-  printLog("Intentando reconectar al Arduino", "important");
+  printLog("Intentando reconectar al Arduino", "warn");
   setTimeout(() => {
     !isPortConnected && serialPort.open();
   }, 3000);

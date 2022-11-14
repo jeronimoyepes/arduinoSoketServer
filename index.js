@@ -2,18 +2,6 @@ import { __dirname } from "./templates/dirname.js";
 import express from "express";
 import http from "http";
 
-import ReadLine from "readline";
-
-const rl = ReadLine.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-});
-
-rl.question("Ingresa el ID de tu grupo", function (name) {
-  const studentGroupId = name;
-  rl.close();
-});
-
 // Utilidad para imprimir textos en consola
 import { printLog } from "./helpers.js/log.js";
 

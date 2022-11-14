@@ -29,23 +29,34 @@ let arduinoDataPackage = [];
 
 // Datos provenientes del arduino
 serialData.on("data", (data) => {
+
+    const parsedData =  () => {
+      try {
+        return JSON.parse(data)
+      } catch (error) {
+        return console.log("error al entender esta entrada de datos del arduino, verificar la información enviada")
+      }
+    }
+
+    console.log(parsedData())
+
   // Enviar los datos mediante el socket a la página web
-  io.volatile.emit("ArduinoData", data);
+  io.volatile.emit("ArduinoData", parsedData());
 
   if (data.length > 0) {
     // Agregar datos al paquete que se enviará a la base de datos
-    arduinoDataPackage.push(data);
+    arduinoDataPackage.push(parsedData());
   }
 });
 
-// Enviar cada dos segundos un paquete de datos al servidor
+// Enviar cada tres segundos un paquete de datos a la base de datos
 setInterval(() => {
   if (arduinoDataPackage.length > 0) {
     console.log("Escribiendo en base de datos", arduinoDataPackage.length + " entradas en el paquete");
-    writeToFirebase({ data: arduinoDataPackage, date: new Date() });
+    // writeToFirebase({ data: arduinoDataPackage, date: new Date() });
   }
   arduinoDataPackage = [];
-}, 2000);
+}, 3000);
 
 // Ruta de la interfaz para mostrar las estadísticas
 app.get("/", (req, res) => {

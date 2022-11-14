@@ -15,34 +15,36 @@ const serialData = serialPort.pipe(new ReadlineParser({ delimiter: "\r\n" }));
 
 let isPortConnected = false;
 
-function reconnectPort() {
-  isPortConnected && serialPort.open();
+function tryPortReconnection() {
+  console.log("Intentando reconectar al Arduino");
+  setTimeout(() => {
+    !isPortConnected && serialPort.open();
+  }, 3000);
 }
 
 // En caso de errores en el puerto
 serialPort.on("error", function (err) {
   console.log("_ERROR_ ", err.message);
+
   isPortConnected = false;
-  setTimeout(() => {
-    console.log("Intentando reconectar al arduino, conectelo o reinicie el programa");
-    reconnectPort();
-  }, 3000);
+
+  tryPortReconnection();
 });
 
-// Conexión establecida correctamente con el puerto
+// Conexión establecida correctamente
 serialPort.on("open", () => {
-  console.log("Puerto serial abierto");
+  console.log("Puerto serial abierto, conectado al Arduino");
+
   isPortConnected = true;
 });
 
-// Conexión establecida correctamente con el puerto
+// Conexión cerrada con el puerto
 serialPort.on("close", () => {
   console.log("Puerto serial cerrado");
+
   isPortConnected = false;
-  setTimeout(() => {
-    console.log("intentando reconectar");
-    reconnectPort();
-  }, 3000);
+
+  tryPortReconnection();
 });
 
 export { serialData };

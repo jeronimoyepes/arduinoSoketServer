@@ -12,6 +12,7 @@ const server = http.createServer(app);
 
 // Importar e iniciar el socket para enviar los datos a la interfaz https://socket.io/docs/v4/
 import { Server } from "socket.io";
+import { writeToFirebase } from "./utilities/firebaseConf.js";
 const io = new Server(server);
 
 // Conexión de socket exitosa
@@ -30,13 +31,14 @@ let arduinoDataPackage = [];
 serialData.on("data", (data) => {
   // Enviar los datos mediante el socket a la página web
   io.volatile.emit("ArduinoData", data);
-
   arduinoDataPackage.push(data);
 });
 
 // Enviar cada dos segundos un paquete de datos al servidor
 setInterval(() => {
-  // TODO: enviar datos a firebase, agregar fecha en el paquete
+  if (data.length > 0) {
+    writeToFirebase({ data: arduinoDataPackage, date: new Date() });
+  }
   arduinoDataPackage = [];
 }, 2000);
 

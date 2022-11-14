@@ -8,7 +8,7 @@ import { SerialPort } from "serialport";
 import { ReadlineParser } from "serialport";
 
 // Instanciar un nuevo puerto serial
-const port = new SerialPort({ path: arduinoComPort, baudRate: 9600 });
+const port = new SerialPort({ path: arduinoComPort, baudRate: 3400 });
 
 // Pasar la información del puerto através del analizador gramatical
 const serialData = port.pipe(new ReadlineParser({ delimiter: "\r\n" }));

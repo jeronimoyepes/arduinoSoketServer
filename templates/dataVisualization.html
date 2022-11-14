@@ -10,10 +10,10 @@
   <body>
     <header>
       <h2>Visualización de variables</h2>
-      <div id="status">
+      <!-- <div id="status">
         <span id="statusIcon"></span>
         <p>Conectado</p>
-      </div>
+      </div> -->
       <a id="download" href="#"
         ><img src="images/download.svg" alt="" />
         <p>Descargar datos</p></a
@@ -47,16 +47,8 @@
   <script>
     // Iniciar librería de socket, por defecto escucha al host de la página
     var socket = io();
-
-    socket.on("close", (err) => {
-      document.getElementById("humidity").innerHTML = err;
-    });
-
-    let incomingSoketData = {};
-
     // conectarse al socket
     socket.on("ArduinoData", function (data) {
-      incomingSoketData = data;
       document.getElementById("humidity").innerHTML = data.humidity;
       document.getElementById("temperature").innerHTML = data.temperature;
       document.getElementById("luminosity").innerHTML = data.luminosity;

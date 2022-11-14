@@ -1,6 +1,9 @@
 // ↓ cambiar el nombre del puerto ↓ Ir a: administrador de dispositivos/puertosCOM para obtener el nombre
 const arduinoComPort = "COM12";
 
+// Velocidad de entrada de registros del puerto serial, debe ser la misma que en el Arduino: Serial.begin([baudRate])
+const baudRate = 3400;
+
 // Librería para leer el puerto serial - Documentación -> https://serialport.io/docs/
 import { SerialPort } from "serialport";
 
@@ -8,7 +11,7 @@ import { SerialPort } from "serialport";
 import { ReadlineParser } from "serialport";
 
 // Instanciar un nuevo puerto serial
-const serialPort = new SerialPort({ path: arduinoComPort, baudRate: 3400 });
+const serialPort = new SerialPort({ path: arduinoComPort, baudRate });
 
 // Pasar la información del puerto através del analizador gramatical
 const serialData = serialPort.pipe(new ReadlineParser({ delimiter: "\r\n" }));

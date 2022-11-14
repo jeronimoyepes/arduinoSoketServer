@@ -29,21 +29,23 @@ let arduinoDataPackage = [];
 
 // Datos provenientes del arduino
 serialData.on("data", (data) => {
-
-    const parsedData =  () => {
-      try {
-        return JSON.parse(data)
-      } catch (error) {
-        return console.log("error al entender esta entrada de datos del arduino, verificar la información enviada")
-      }
+  const parsedData = () => {
+    try {
+      return JSON.parse(data);
+    } catch (error) {
+      console.log(
+        `error en la sintaxis de la información enviada: ${data}`
+      );
+      return null;
     }
+  };
 
-    console.log(parsedData())
+  console.log("Lectura: ", parsedData());
 
   // Enviar los datos mediante el socket a la página web
   io.volatile.emit("ArduinoData", parsedData());
 
-  if (data.length > 0) {
+  if (parsedData()) {
     // Agregar datos al paquete que se enviará a la base de datos
     arduinoDataPackage.push(parsedData());
   }
@@ -52,8 +54,11 @@ serialData.on("data", (data) => {
 // Enviar cada tres segundos un paquete de datos a la base de datos
 setInterval(() => {
   if (arduinoDataPackage.length > 0) {
-    console.log("Escribiendo en base de datos", arduinoDataPackage.length + " entradas en el paquete");
-    // writeToFirebase({ data: arduinoDataPackage, date: new Date() });
+    console.log(
+      "Escribiendo en base de datos",
+      arduinoDataPackage.length + " entradas en el paquete"
+    );
+    writeToFirebase({ data: arduinoDataPackage, date: new Date() });
   }
   arduinoDataPackage = [];
 }, 3000);

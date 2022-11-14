@@ -2,6 +2,8 @@ import { __dirname } from "./templates/dirname.js";
 import express from "express";
 import http from "http";
 
+import { studentGroupId } from "./variables.js";
+
 // Utilidad para imprimir textos en consola
 import { printLog } from "./helpers.js/log.js";
 
@@ -62,13 +64,14 @@ serialData.on("data", (data) => {
 
 // Enviar cada tres segundos un paquete de datos a la base de datos
 setInterval(() => {
+  const date = new Date()
   if (arduinoDataPackage.length > 0) {
     printLog(
-      `Escribiendo en base de datos ${arduinoDataPackage.length} entradas en el paquete`,
+      `Escribiendo en base de datos ${arduinoDataPackage.length} entradas en el paquete. ${date} - ${studentGroupId}`,
       "important"
     );
     // TODO: pedirle al estudiante el número de identificación del grupo al iniciar el script y enviarlo con el paquete a la base de datos
-    // writeToFirebase({ data: arduinoDataPackage, date: new Date() });
+    writeToFirebase({ data: arduinoDataPackage, date, studentGroupId });
   }
   arduinoDataPackage = [];
 }, 3000);

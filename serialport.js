@@ -1,8 +1,6 @@
-// ↓ cambiar el nombre del puerto ↓ Ir a: administrador de dispositivos/puertosCOM para obtener el nombre
-const arduinoComPort = "COM12";
+// 📋 Configuración y conexión al puerto serial del Arduino
 
-// Velocidad de entrada de registros del puerto serial, debe ser la misma que en el Arduino: Serial.begin([baudRate])
-const baudRate = 3400;
+import { arduinoComPort, baudRate } from "./variables.js";
 
 // Utilidad para imprimir textos en consola
 import { printLog } from "./helpers.js/log.js";

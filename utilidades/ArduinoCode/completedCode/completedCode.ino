@@ -24,7 +24,7 @@ void setup() {
 
   dht.begin();  // Inicializar lectura de sensor de temperatura y humedad
   sensor_t sensor;
-  delayMS = sensor.min_delay / 1000;
+  delayMS = sensor.min_delay / 1000; //Delay mínimo para la captura de temperatura y humedad
 
   pinMode(movementSensor, INPUT);
   pinMode(photoresistor, INPUT)

@@ -1,5 +1,5 @@
 void setup() {
-  Serial.begin(3400);  // Inicializa el puerto serial con un Baud Rate de 3400
+  Serial.begin(9600);  // Inicializa el puerto serial con un Baud Rate de 3400
 
   // ---
   // Aquí tu código de lectura de los sensores

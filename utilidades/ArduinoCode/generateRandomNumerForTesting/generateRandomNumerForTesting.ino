@@ -1,3 +1,5 @@
+// Este código envia datos aleatorios en el formato requerido por el servidor con el propósito de hacer pruebas
+
 void setup() {
   Serial.begin(9600);  // initialize the serial communication
 }

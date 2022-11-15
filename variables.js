@@ -7,7 +7,7 @@ const FBcollection = "ColeccionVariablesInsectos";
 // Velocidad de entrada de registros del puerto serial.
 // Debe ser la misma que en código del Arduino: Serial.begin([baudRate])
 // ❕ No modificar si no se modificó en el Arduino
-const baudRate = 3400;
+const baudRate = 9600;
 
 // Conectar Arduino e ir a: administrador de dispositivos/puertosCOM para encontrar el puerto al que está conectado
 // ↓ cambiar el nombre del puerto del Arduino ↓ 

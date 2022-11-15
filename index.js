@@ -71,10 +71,10 @@ setInterval(() => {
       "important"
     );
 
-    // writeToFirebase({ data: arduinoDataPackage, date, studentGroupId });
+    writeToFirebase({ data: arduinoDataPackage, date, studentGroupId });
   }
   arduinoDataPackage = [];
-}, 3000);
+}, 5000);
 
 // Ruta de la interfaz para mostrar las estadísticas
 app.get("/", (req, res) => {
